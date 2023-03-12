@@ -5,6 +5,7 @@ import yaml
 from binance import Client
 from yaml.loader import SafeLoader
 import binance
+from pprint import pprint
 
 
 with open("testnet_keys.yaml") as f:
@@ -87,6 +88,18 @@ print(clt.ORDER_RESP_TYPE_ACK)
 print(clt.ORDER_RESP_TYPE_RESULT)
 print(clt.ORDER_RESP_TYPE_FULL)
 
-# for accessing the data returned by Client.aggregate_trades()
 
+# get exchange info
+excg_info = client.get_exchange_info()
 
+# get coins info
+tickers_info = client.get_all_tickers()
+
+# get exchange info for particular symbol (coin pair)
+bnbbtc = client.get_symbol_info("BNBBTC")
+
+# get daily account snapshot
+snapshot = client.get_account_snapshot(type="SPOT")
+
+# get current products
+products = client.get_products()
