@@ -5,6 +5,7 @@ TODO: or store in JSON files?
 """
 from binance import Client
 from math import log
+import requests
 
 
 def prepare_for_bellman_ford(api_key, api_secret):
@@ -12,7 +13,7 @@ def prepare_for_bellman_ford(api_key, api_secret):
     that is to be consumed by Bellman-Ford algorithm
     """
     # TODO: potential exception should be handled
-    client = Client(api_key, api_secret, testnet=True)
+    client = Client(api_key, api_secret)#, testnet=True)
 
     # get exchange info
     # TODO: potential exception should be handled
@@ -42,3 +43,28 @@ def prepare_for_bellman_ford(api_key, api_secret):
         'to': i['to'],
         'ratio': -log(float(i['rate']))} for i in coin_price_lst]
     return coin_ratio_lst
+
+
+def get_response(url):
+    res = requests.get(url)
+    res.raise_for_status()
+    if res.status_code == 200:
+        return res.json()
+    return None
+
+
+def get_exchange_info():
+    base_url = 'https://api.binance.com'
+    endpoint = '/api/v3/exchangeInfo'
+    return get_response(base_url + endpoint)
+
+
+def create_coin_pairs():
+    """Create coin pairs from binance API
+    """
+    info = get_exchange_info()
+    if info:
+        pairs = info['symbols']
+        full_data_dic = {s['symbol']: s for s in pairs}
+        return full_data_dic.keys()
+    return None
