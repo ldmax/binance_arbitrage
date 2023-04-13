@@ -2,10 +2,11 @@
 Build weighted graph using coin
 pairs data extracted from binace API
 """
+import networkx as nx
 import yaml
 from yaml.loader import SafeLoader
+
 from coin_pairs import prepare_for_bellman_ford
-import networkx as nx
 
 
 def get_negative_circuits(api_key, secret):

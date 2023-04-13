@@ -3,8 +3,9 @@ Download coin pairs via binance API
 and store in memory
 TODO: or store in JSON files?
 """
-from binance import Client
 from math import log
+
+from binance import Client
 import requests
 
 
