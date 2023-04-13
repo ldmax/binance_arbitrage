@@ -1,0 +1,28 @@
+@document.meta
+title: README
+description: 
+authors: root
+categories: 
+created: 2023-04-13
+updated: 2023-04-13
+version: 1.0.0
+@end
+
+
+* 这个项目是我用来做套利的
+** 第一阶段
+   binance内部的所内套利。
+   采用的策略参考Eric Han的arbitrage bot的论文，即构建directed graph，然后找出negative circuits。
+   在所有可能盈利的sequence (即negative circuits)中，找出那些有安全垫且可能盈利最大或者盈利最快的sequence。
+
+** 第二阶段
+   将第一阶段的directed graph building和negative circuit finding的过程扩展到多个crypto交易所之间。
+
+** 第三阶段
+   将第二阶段的directed graph building和negative circuit finding的过程扩展到传统金融交易所，即将外汇的波动也考虑进来
+
+* 选用的是sammchardy/python-binance这个库
+因为从star来看最多，而且使用的人最多
+文档在[python-binance](https://python-binance.readthedocs.io/en/latest/)
+
+blog post在[Crypto Exchange Python Programming Blog](https://sammchardy.github.io)

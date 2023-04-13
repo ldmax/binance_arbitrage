@@ -1,0 +1,14 @@
+@document.meta
+title: TODO
+description: 
+authors: root
+categories: 
+created: 2023-04-13
+updated: 2023-04-13
+version: 1.0.0
+@end
+
+* 第一阶段
+** 将从binance获取交易对和价格的方式从restful api改为websocket api
+** 考虑安全垫，跑回测，计算账户资产的变化曲线
+** 考虑order filter，实盘下单
