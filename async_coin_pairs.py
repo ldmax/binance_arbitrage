@@ -1,24 +1,30 @@
-"""syncronous version of coin_pairs.py
-
+"""
 Download coin pairs via binance API
 and store in memory
 TODO: or store in JSON files?
 """
+import asyncio
 from math import log
 
-from binance import Client
-import time
+from binance import AsyncClient, BinanceSocketManager
 
 
-def prepare_for_bellman_ford(api_key, api_secret):
+async def prepare_for_bellman_ford(api_key, api_secret):
     """Prepare nodes and weights of weighted DAG
     that is to be consumed by Bellman-Ford algorithm
     """
-    client = Client(api_key, api_secret)#, testnet=True)
+    # TODO: potential exception should be handled
+    client = await AsyncClient.create(api_key, api_secret)#, testnet=True)
+
+    # TODO what do I do with bsm?
+    bsm = BinanceSocketManager(client)
+
     # get exchange info
-    exchange_info = client.get_exchange_info()
+    # TODO: potential exception should be handled
+    exchange_info = await client.get_exchange_info()
 
     # only these coins in binance?
+    # TODO consider using async for because this loop is large
     pairs = [{i['symbol']: {
         'from': i['baseAsset'],
         'to': i['quoteAsset']}} for i in exchange_info['symbols']]
@@ -30,7 +36,8 @@ def prepare_for_bellman_ford(api_key, api_secret):
         pair = list(coin.keys())[0]
         coin_price_dict['from'] = coin[pair]['from']
         coin_price_dict['to'] = coin[pair]['to']
-        # TODO: use order book to replace avg price
+        # TODO: very slow to get average price
+        #        use some async or socket to accelerate
         coin_price_dict['rate'] = client.get_avg_price(symbol=pair)['price']
         coin_price_lst.append(coin_price_dict)
 
