@@ -7,7 +7,6 @@ TODO: or store in JSON files?
 from math import log
 
 from binance import Client
-import time
 
 
 def prepare_for_bellman_ford(api_key, api_secret):
