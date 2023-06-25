@@ -3,4 +3,4 @@
 import unicorn_binance_local_depth_cache as nbldc
 
 
-mgr = nbldc.BinanceLocalDepthCacheManager(exchange="binance.come")
+mgr = nbldc.BinanceLocalDepthCacheManager(exchange="binance.com")
