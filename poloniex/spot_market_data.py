@@ -24,3 +24,8 @@ def get_ticker(symbol: str) -> Dict:
         print(f'Failed to call prices API for {symbol}')
         return {}
     return res.json()
+
+def get_orderbook(symbol, scale, limit):
+    """
+    """
+    pass

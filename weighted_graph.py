@@ -35,6 +35,6 @@ def get_negative_circuits(api_key, secret):
 if __name__ == "__main__":
     with open("testnet_keys.yaml") as f:
         keys = yaml.load(f, Loader=SafeLoader)
-
+ 
     negative_circuits = get_negative_circuits(keys['api_key'], keys['secret'])
 
